@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   bag: [],
+  wish: [],
 };
 
 const bagSlice = createSlice({
@@ -19,7 +20,7 @@ const bagSlice = createSlice({
     },
 
     removeFromBag: (state, action) => {
-      const removeItem = state.bag.filter((item) => item != action.payload);
+      const removeItem = state.bag.filter((item) => item.id != action.payload);
       state.bag = removeItem;
     },
     increaseItems: (state, action) => {
@@ -34,10 +35,22 @@ const bagSlice = createSlice({
         item.quantity--;
       }
     },
+    addToWishlist: (state, action) => {
+      state.wish.push(action.payload);
+    },
+    removeFromWishlist: (state, action) => {
+      return state.wish.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
-export const { addToBag, removeFromBag, increaseItems, decreaseItems } =
-  bagSlice.actions;
+export const {
+  addToBag,
+  removeFromBag,
+  increaseItems,
+  decreaseItems,
+  addToWishlist,
+  removeFromWishlist,
+} = bagSlice.actions;
 
 export default bagSlice.reducer;

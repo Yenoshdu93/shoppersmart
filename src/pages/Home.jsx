@@ -27,9 +27,9 @@ const Home = () => {
             </h1>
           </div>
         ) : (
-          <div>
+          <div className="">
             {/*  Header  */}
-            <Header />
+            <Header products={products} />
             {/* Banner */}
             <Banner />
             {/* ProductsFeed */}

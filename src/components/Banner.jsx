@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FcNext, FcPrevious } from "react-icons/fc";
 
 const Banner = () => {
@@ -18,6 +18,17 @@ const Banner = () => {
   const prevSlide = () => {
     setCurrentIndex((currentIndex - 1 + items.length) % items.length);
   };
+
+  const interval = 5000;
+
+  useEffect(() => {
+    const intervalId = setInterval(nextSlide, interval);
+
+    // Clear the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [currentIndex, interval]);
 
   return (
     <div className="relative my-4 xl:my-8 overflow-hidden ">

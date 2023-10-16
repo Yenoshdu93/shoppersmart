@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { BsFillBagPlusFill, BsSuitHeart } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { addToBag } from "../app/bagSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToBag, addToWishlist, removeFromWishlist } from "../app/bagSlice";
 import { useNavigate } from "react-router-dom";
 
 const Product = ({
@@ -17,6 +17,7 @@ const Product = ({
   const [ratings, setRating] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [wishListed, setWishlisted] = useState(false);
   const item = {
     id,
     title,
@@ -47,6 +48,16 @@ const Product = ({
       },
     });
   };
+
+  // const handleAddToWishlist = (item) => {
+  //   if (items.some((wishedItem) => wishedItem.id === item.id)) {
+  //     dispatch(removeFromWishlist(item));
+  //     setWishlisted(false);
+  //   } else {
+  //     dispatch(addToWishlist(item));
+  //     setWishlisted(true);
+  //   }
+  // };
   return (
     <>
       <div className="relative space-y-2 flex flex-col border border-gray-400 rounded-md p-4 z-20">
@@ -73,7 +84,13 @@ const Product = ({
             <BsFillBagPlusFill className="text-4xl hover:bg-white hover:text-gray-700 transition-all ease-in-out duration-500 border px-2 py-1 group  bg-gray-700 text-white font-bold rounded-md" />
           </button>
           <button>
-            <BsSuitHeart className="text-4xl hover:text-green-500 transition-all ease-in-out duration-500 border px-2 py-1 group bg-white rounded-md" />
+            <BsSuitHeart
+              className={`${
+                wishListed ? `bg-gray-600 text-white` : `null`
+              } text-4xl hover:text-green-500 transition-all 
+              ease-in-out duration-500 border px-2 py-1 group bg-white 
+              rounded-md `}
+            />
           </button>
         </div>
         <div className="flex flex-col gap-4">
